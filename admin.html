@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -48,17 +48,17 @@
             <label>Starting points for every team <input id="sPts" type="number" min="1" inputmode="numeric"></label>
           </div>
           <p class="hint">Change this before teams start bidding. Changing it later shifts the score of every team that has not entered its own points.</p>
-          <button id="saveSettings" class="primary" type="button" style="margin-top:14px">Save</button>
+          <button id="saveSettings" class="primary" type="button">Save</button>
         </section>
 
         <section class="card">
           <div class="charthead">
-            <h2>Registered teams <span class="hint" id="teamCount" style="font-weight:600"></span></h2>
+            <h2>Registered teams <span class="hint" id="teamCount"></span></h2>
           </div>
           <p class="hint">Every team that has entered its name appears here. Edit a team's total points, rename it, or remove it. Removing a team deletes its bids and answers too.</p>
           <div class="tablewrap">
             <table class="teamtable">
-              <thead><tr><th>Team</th><th>Total points</th><th>Locked in bids</th><th>Bids placed</th><th></th></tr></thead>
+              <thead><tr><th>Team</th><th>Total points</th><th>Locked in bids</th><th>Bids placed</th><th>Actions</th></tr></thead>
               <tbody id="teamRows"></tbody>
             </table>
           </div>
@@ -67,7 +67,7 @@
         <section class="card">
           <h2>Reset event</h2>
           <p class="hint">Clears everything except your prepared questions: all live questions, bids, answers, the scoreboard, all team names and the points they entered. Teams must enter their team name and points again. The starting points setting is kept.</p>
-          <button id="resetAll" class="ghost danger" type="button" style="margin-top:14px">Reset everything</button>
+          <button id="resetAll" class="ghost danger" type="button">Reset everything</button>
         </section>
 
         <section class="card">
@@ -87,15 +87,15 @@
               </select>
             </label>
             <p class="hint wide" id="typeHelp"></p>
-            <label>Topic shown to bidders <input id="qTopic" maxlength="60" placeholder="Dissolution and solubility"></label>
-            <label>Subject line <input id="qSubject" maxlength="60" placeholder="Physical Pharmaceutics · Unit II"></label>
+            <label>Topic shown to bidders <input type="text" id="qTopic" maxlength="60" placeholder="Dissolution and solubility"></label>
+            <label>Subject line <input type="text" id="qSubject" maxlength="60" placeholder="Physical Pharmaceutics · Unit II"></label>
             <label>Difficulty
               <select id="qDiff"><option>Easy</option><option selected>Medium</option><option>Hard</option></select>
             </label>
             <label class="wide">Hint shown to bidders (optional) <textarea id="qHint" maxlength="300" placeholder="A short teaser without giving the answer away"></textarea></label>
 
             <div class="wide subform" id="box-media" hidden>
-              <label class="wide"><span id="qMediaLabel">Media link</span> <input id="qMedia" placeholder="https://..."></label>
+              <label class="wide"><span id="qMediaLabel">Media link</span> <input type="url" id="qMedia" placeholder="https://..."></label>
               <label id="modeWrap">Teams answer by
                 <select id="qMode"><option value="mcq">Choosing an option</option><option value="text">Typing the answer</option></select>
               </label>
@@ -112,29 +112,29 @@
             </div>
 
             <div class="wide subform" id="box-mcq">
-              <label>Option A <input id="qA" maxlength="120"></label>
-              <label>Option B <input id="qB" maxlength="120"></label>
-              <label>Option C <input id="qC" maxlength="120"></label>
-              <label>Option D <input id="qD" maxlength="120"></label>
+              <label>Option A <input type="text" id="qA" maxlength="120"></label>
+              <label>Option B <input type="text" id="qB" maxlength="120"></label>
+              <label>Option C <input type="text" id="qC" maxlength="120"></label>
+              <label>Option D <input type="text" id="qD" maxlength="120"></label>
               <label>Correct answer
                 <select id="qCorrect"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select>
               </label>
             </div>
 
             <div class="wide subform" id="box-text" hidden>
-              <label class="wide">Correct answer(s) <input id="qAccept" maxlength="200" placeholder="Disintegration | disintegration time"></label>
+              <label class="wide">Correct answer(s) <input type="text" id="qAccept" maxlength="200" placeholder="Disintegration | disintegration time"></label>
               <p class="hint wide">Separate other accepted answers with |. Capital letters, extra spaces and a final full stop are ignored when checking.</p>
             </div>
 
             <div class="wide subform" id="box-match" hidden>
               <p class="hint wide">Fill 2 to 6 pairs. Teams see the left side in order and the right side shuffled. Leave unused rows empty.</p>
               <div class="wide pairs">
-                <div class="pairrow"><input class="pl" maxlength="80" placeholder="Left 1"><input class="pr" maxlength="80" placeholder="Matches with 1"></div>
-                <div class="pairrow"><input class="pl" maxlength="80" placeholder="Left 2"><input class="pr" maxlength="80" placeholder="Matches with 2"></div>
-                <div class="pairrow"><input class="pl" maxlength="80" placeholder="Left 3"><input class="pr" maxlength="80" placeholder="Matches with 3"></div>
-                <div class="pairrow"><input class="pl" maxlength="80" placeholder="Left 4"><input class="pr" maxlength="80" placeholder="Matches with 4"></div>
-                <div class="pairrow"><input class="pl" maxlength="80" placeholder="Left 5"><input class="pr" maxlength="80" placeholder="Matches with 5"></div>
-                <div class="pairrow"><input class="pl" maxlength="80" placeholder="Left 6"><input class="pr" maxlength="80" placeholder="Matches with 6"></div>
+                <div class="pairrow"><input type="text" class="pl" maxlength="80" placeholder="Left 1"><input type="text" class="pr" maxlength="80" placeholder="Matches with 1"></div>
+                <div class="pairrow"><input type="text" class="pl" maxlength="80" placeholder="Left 2"><input type="text" class="pr" maxlength="80" placeholder="Matches with 2"></div>
+                <div class="pairrow"><input type="text" class="pl" maxlength="80" placeholder="Left 3"><input type="text" class="pr" maxlength="80" placeholder="Matches with 3"></div>
+                <div class="pairrow"><input type="text" class="pl" maxlength="80" placeholder="Left 4"><input type="text" class="pr" maxlength="80" placeholder="Matches with 4"></div>
+                <div class="pairrow"><input type="text" class="pl" maxlength="80" placeholder="Left 5"><input type="text" class="pr" maxlength="80" placeholder="Matches with 5"></div>
+                <div class="pairrow"><input type="text" class="pl" maxlength="80" placeholder="Left 6"><input type="text" class="pr" maxlength="80" placeholder="Matches with 6"></div>
               </div>
             </div>
 
@@ -143,7 +143,7 @@
             <label>Bidding runs for (minutes) <input id="qMins" type="number" min="0.5" step="0.5" value="2" inputmode="decimal"></label>
             <label>Time to answer (seconds) <input id="qSecs" type="number" min="10" value="60" inputmode="numeric"></label>
           </div>
-          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+          <div class="form-actions">
             <button id="addQ" class="primary" type="button">Add and open bidding now</button>
             <button id="saveDraft" class="ghost" type="button">Save to prepared questions</button>
           </div>
@@ -152,12 +152,12 @@
 
         <section class="card">
           <div class="charthead">
-            <h2>Prepared questions <span class="hint" id="draftCount" style="font-weight:600"></span></h2>
+            <h2>Prepared questions <span class="hint" id="draftCount"></span></h2>
           </div>
           <p class="hint">Saved here and not visible to teams. Press Release when you want bidding to start; the bidding timer starts at that moment.</p>
           <div class="tablewrap">
             <table>
-              <thead><tr><th>Question</th><th>Difficulty</th><th>Bidding</th><th>Answer</th><th></th></tr></thead>
+              <thead><tr><th>Question</th><th>Difficulty</th><th>Bidding</th><th>Answer</th><th>Actions</th></tr></thead>
               <tbody id="draftRows"></tbody>
             </table>
           </div>
@@ -170,7 +170,7 @@
           </div>
           <div class="tablewrap">
             <table>
-              <thead><tr><th>Question</th><th>Status</th><th>Top bid</th><th>Leader</th><th>Timer</th><th>Answer</th><th></th></tr></thead>
+              <thead><tr><th>Question</th><th>Status</th><th>Top bid</th><th>Leader</th><th>Timer</th><th>Answer</th><th>Actions</th></tr></thead>
               <tbody id="rows"></tbody>
             </table>
           </div>
