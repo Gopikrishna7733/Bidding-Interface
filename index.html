@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PMM 3 – Pharmaceutics Mastery Matrix 3</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="side">
+      <h1 class="brand">PMM<span>3</span><small>Pharmaceutics Mastery Matrix 3</small></h1>
+
+      <nav class="menu" id="filters" aria-label="Filter questions">
+        <button data-f="all" class="on" type="button">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.8"/><rect x="3" y="14" width="7" height="7" rx="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.8"/></svg>
+          All questions
+        </button>
+        <button data-f="open" type="button">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>
+          Open for bids
+        </button>
+        <button data-f="closed" type="button">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2.2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+          Closed
+        </button>
+      </nav>
+    </aside>
+
+    <div class="content">
+      <header class="top topgrid">
+        <label class="search">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input id="search" type="search" placeholder="Search by topic or subject" autocomplete="off" aria-label="Search questions">
+        </label>
+        <div class="sidecard walletbox">
+          <h3>Your wallet</h3>
+          <div class="wallet" id="wallet" aria-live="polite"></div>
+        </div>
+        <label class="pill">Team
+          <input id="bidder" maxlength="24" placeholder="Your team" autocomplete="off">
+          <span class="avatar" id="avatar" aria-hidden="true">?</span>
+        </label>
+      </header>
+
+      <div class="dash">
+        <div class="leftcol">
+          <div class="mainrow">
+            <section class="card hero" id="hero" aria-live="polite"></section>
+            <section class="card statcard" aria-label="Question details">
+              <h2>Question details</h2>
+              <div class="tiles" id="tiles"></div>
+            </section>
+          </div>
+
+          <section class="card" aria-label="Scoreboard">
+            <div class="charthead">
+              <h2>Scoreboard</h2>
+              <div class="seg" id="metric" role="group" aria-label="Chart measure">
+                <button data-m="board" class="on" type="button">Leaderboard</button>
+              </div>
+            </div>
+            <div id="bars" class="bars"></div>
+            <p class="note" id="chartNote"></p>
+          </section>
+
+          <section class="card rules" id="rules" aria-label="How it works"></section>
+        </div>
+
+        <aside class="card feedcard">
+          <h2>Live activity</h2>
+          <ol id="feed"></ol>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <dialog id="bidDialog">
+    <form method="dialog" id="bidForm">
+      <h3 id="bidTitle"></h3>
+      <p class="muted" id="bidInfo"></p>
+      <label>Your bid (points)
+        <input id="bidAmount" type="number" inputmode="numeric" min="1" step="1" required>
+      </label>
+      <div class="quick" id="quick"></div>
+      <p class="err" id="bidErr" role="alert"></p>
+      <div class="row">
+        <button value="cancel" class="ghost" type="submit" formnovalidate>Cancel</button>
+        <button id="bidGo" type="button" class="primary">Place bid</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="store.js"></script>
+  <script src="bidder.js"></script>
+  <script src="particles.js"></script>
+</body>
+</html>

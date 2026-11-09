@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PMM 3 – Live bidding board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="live">
+  <div class="lwrap">
+    <header class="ltop">
+      <h1 class="brand">PMM<span>3</span><small>Live bidding board · Pharmaceutics Mastery Matrix 3</small></h1>
+      <span class="livepill"><i></i>LIVE</span>
+      <nav class="menu lmenu" aria-label="Pages">
+        <a class="on" href="live.html" aria-current="page">Score Board</a>
+      </nav>
+      <div class="lctl">
+        <button id="prevQ" class="ghost" type="button" aria-label="Previous question">‹</button>
+        <button id="autoQ" class="ghost" type="button">Auto</button>
+        <button id="nextQ" class="ghost" type="button" aria-label="Next question">›</button>
+        <button id="fsBtn" class="ghost" type="button">Full screen</button>
+        <span id="clock" aria-hidden="true"></span>
+      </div>
+    </header>
+
+    <div id="flash" class="flash" role="status" aria-live="assertive"></div>
+
+    <main class="lgrid">
+      <div class="lleft">
+        <div id="others" class="others"></div>
+        <section class="card lmain" id="main" aria-live="polite"></section>
+      </div>
+      <div class="lside">
+        <section class="card" id="board" aria-label="Scoreboard"></section>
+        <section class="card" id="feed2" aria-label="Live activity"></section>
+      </div>
+    </main>
+    <p class="lhint">Keys: ← → switch question · A auto-follow · F full screen</p>
+  </div>
+
+  <script src="store.js"></script>
+  <script src="live.js"></script>
+  <script src="particles.js"></script>
+</body>
+</html>

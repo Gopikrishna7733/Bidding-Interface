@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>PMM 3 – Quiz master</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="side">
+      <h1 class="brand">PMM<span>3</span><small>Quiz master · Pharmaceutics Mastery Matrix 3</small></h1>
+      <nav class="menu" aria-label="Pages">
+        <a class="on" href="admin.html" aria-current="page">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.3 6.8 19.1l1-5.8L3.5 9.2l5.9-.9L12 3z"/></svg>
+          Quiz master
+        </a>
+        <a href="index.html">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.8"/><rect x="3" y="14" width="7" height="7" rx="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.8"/></svg>
+          Team page
+        </a>
+        <a href="live.html" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+          Score Board
+        </a>
+      </nav>
+      <button id="lockBtn" class="ghost lockbtn" type="button" hidden>Lock</button>
+    </aside>
+
+    <div class="content">
+      <header class="top"><h2 class="pagetitle">Quiz master</h2></header>
+
+      <section id="gate" class="gate card">
+        <h2>Sign in</h2>
+        <label>Passcode <input id="pass" type="password" autocomplete="current-password"></label>
+        <p class="err" id="passErr" role="alert"></p>
+        <button id="unlockBtn" class="primary" type="button">Unlock</button>
+      </section>
+
+      <main id="panel" class="admin" hidden>
+        <section class="card">
+          <h2>Event settings</h2>
+          <div class="lotform">
+            <label>Starting points for every team <input id="sPts" type="number" min="1" inputmode="numeric"></label>
+          </div>
+          <p class="hint">Change this before teams start bidding. Changing it later shifts the score of every team that has not entered its own points.</p>
+          <button id="saveSettings" class="primary" type="button" style="margin-top:14px">Save</button>
+        </section>
+
+        <section class="card">
+          <div class="charthead">
+            <h2>Registered teams <span class="hint" id="teamCount" style="font-weight:600"></span></h2>
+          </div>
+          <p class="hint">Every team that has entered its name appears here. Edit a team's total points, rename it, or remove it. Removing a team deletes its bids and answers too.</p>
+          <div class="tablewrap">
+            <table class="teamtable">
+              <thead><tr><th>Team</th><th>Total points</th><th>Locked in bids</th><th>Bids placed</th><th></th></tr></thead>
+              <tbody id="teamRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Reset event</h2>
+          <p class="hint">Clears everything except your prepared questions: all live questions, bids, answers, the scoreboard, all team names and the points they entered. Teams must enter their team name and points again. The starting points setting is kept.</p>
+          <button id="resetAll" class="ghost danger" type="button" style="margin-top:14px">Reset everything</button>
+        </section>
+
+        <section class="card">
+          <h2>Add a question</h2>
+          <p class="hint">Teams see the topic, subject, type, difficulty and hint while bidding. The question and answer area stay hidden until a team wins it.</p>
+          <div class="lotform">
+            <label class="wide">Question type
+              <select id="qType">
+                <option value="blank">Fill in the Blanks</option>
+                <option value="statement">Statement correct</option>
+                <option value="reasoning">Reasoning</option>
+                <option value="aptitude">Multiple Choice Questions</option>
+                <option value="matching">Matching</option>
+                <option value="qa" selected>Question and Answer</option>
+                <option value="video">Watch Video and Answer</option>
+                <option value="sound">Guess the Answer by Sound</option>
+              </select>
+            </label>
+            <p class="hint wide" id="typeHelp"></p>
+            <label>Topic shown to bidders <input id="qTopic" maxlength="60" placeholder="Dissolution and solubility"></label>
+            <label>Subject line <input id="qSubject" maxlength="60" placeholder="Physical Pharmaceutics · Unit II"></label>
+            <label>Difficulty
+              <select id="qDiff"><option>Easy</option><option selected>Medium</option><option>Hard</option></select>
+            </label>
+            <label class="wide">Hint shown to bidders (optional) <textarea id="qHint" maxlength="300" placeholder="A short teaser without giving the answer away"></textarea></label>
+
+            <div class="wide subform" id="box-media" hidden>
+              <label class="wide"><span id="qMediaLabel">Media link</span> <input id="qMedia" placeholder="https://..."></label>
+              <label id="modeWrap">Teams answer by
+                <select id="qMode"><option value="mcq">Choosing an option</option><option value="text">Typing the answer</option></select>
+              </label>
+              <p class="hint wide">Add a link to a file or video that is already online. Files cannot be uploaded here because they would not fit in browser storage.</p>
+            </div>
+
+            <div class="wide subform" id="box-q">
+              <label class="wide"><span id="qTextLabel">Question</span> <textarea id="qText" maxlength="500" placeholder="Type the full question"></textarea></label>
+            </div>
+
+            <div class="wide subform" id="box-ar" hidden>
+              <label class="wide">Assertion (A) <textarea id="qAssert" maxlength="300" placeholder="Type the assertion"></textarea></label>
+              <label class="wide">Reason (R) <textarea id="qReason" maxlength="300" placeholder="Type the reason"></textarea></label>
+            </div>
+
+            <div class="wide subform" id="box-mcq">
+              <label>Option A <input id="qA" maxlength="120"></label>
+              <label>Option B <input id="qB" maxlength="120"></label>
+              <label>Option C <input id="qC" maxlength="120"></label>
+              <label>Option D <input id="qD" maxlength="120"></label>
+              <label>Correct answer
+                <select id="qCorrect"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select>
+              </label>
+            </div>
+
+            <div class="wide subform" id="box-text" hidden>
+              <label class="wide">Correct answer(s) <input id="qAccept" maxlength="200" placeholder="Disintegration | disintegration time"></label>
+              <p class="hint wide">Separate other accepted answers with |. Capital letters, extra spaces and a final full stop are ignored when checking.</p>
+            </div>
+
+            <div class="wide subform" id="box-match" hidden>
+              <p class="hint wide">Fill 2 to 6 pairs. Teams see the left side in order and the right side shuffled. Leave unused rows empty.</p>
+              <div class="wide pairs">
+                <div class="pairrow"><input class="pl" maxlength="80" placeholder="Left 1"><input class="pr" maxlength="80" placeholder="Matches with 1"></div>
+                <div class="pairrow"><input class="pl" maxlength="80" placeholder="Left 2"><input class="pr" maxlength="80" placeholder="Matches with 2"></div>
+                <div class="pairrow"><input class="pl" maxlength="80" placeholder="Left 3"><input class="pr" maxlength="80" placeholder="Matches with 3"></div>
+                <div class="pairrow"><input class="pl" maxlength="80" placeholder="Left 4"><input class="pr" maxlength="80" placeholder="Matches with 4"></div>
+                <div class="pairrow"><input class="pl" maxlength="80" placeholder="Left 5"><input class="pr" maxlength="80" placeholder="Matches with 5"></div>
+                <div class="pairrow"><input class="pl" maxlength="80" placeholder="Left 6"><input class="pr" maxlength="80" placeholder="Matches with 6"></div>
+              </div>
+            </div>
+
+            <label>Starting bid (points) <input id="qStart" type="number" min="1" value="50" inputmode="numeric"></label>
+            <label>Minimum raise (points) <input id="qInc" type="number" min="1" value="10" inputmode="numeric"></label>
+            <label>Bidding runs for (minutes) <input id="qMins" type="number" min="0.5" step="0.5" value="2" inputmode="decimal"></label>
+            <label>Time to answer (seconds) <input id="qSecs" type="number" min="10" value="60" inputmode="numeric"></label>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+            <button id="addQ" class="primary" type="button">Add and open bidding now</button>
+            <button id="saveDraft" class="ghost" type="button">Save to prepared questions</button>
+          </div>
+          <p class="hint">Saving to prepared questions keeps the question hidden from teams until you press Release.</p>
+        </section>
+
+        <section class="card">
+          <div class="charthead">
+            <h2>Prepared questions <span class="hint" id="draftCount" style="font-weight:600"></span></h2>
+          </div>
+          <p class="hint">Saved here and not visible to teams. Press Release when you want bidding to start; the bidding timer starts at that moment.</p>
+          <div class="tablewrap">
+            <table>
+              <thead><tr><th>Question</th><th>Difficulty</th><th>Bidding</th><th>Answer</th><th></th></tr></thead>
+              <tbody id="draftRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="charthead">
+            <h2>Questions</h2>
+            <button id="clearAll" class="ghost danger" type="button">Clear all questions and bids</button>
+          </div>
+          <div class="tablewrap">
+            <table>
+              <thead><tr><th>Question</th><th>Status</th><th>Top bid</th><th>Leader</th><th>Timer</th><th>Answer</th><th></th></tr></thead>
+              <tbody id="rows"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="store.js"></script>
+  <script src="admin.js"></script>
+  <script src="particles.js"></script>
+</body>
+</html>
