@@ -1,0 +1,24 @@
+# PMM 3 – Pharmaceutics Mastery Matrix 3 (Quiz Bidding & Evaluation Platform)
+# Python Dependencies (Aligned with doc/architecture.md & doc/problemstatement.md)
+
+# 1. API Gateway, WebSocket Server & Static Hosting (Architecture Section 9)
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+websockets>=12.0
+pydantic>=2.6.0
+
+# 2. Authentication, Access Control & Security (Architecture Section 8 & 9)
+pyjwt[crypto]>=2.8.0
+passlib[bcrypt]>=1.7.4
+python-multipart>=0.0.9
+
+# 3. Cloud Database & Real-Time State Persistence (Architecture Section 9)
+firebase-admin>=6.5.0
+google-cloud-firestore>=2.15.0
+
+# 4. External Media URL & Link Verification (Architecture Section 6)
+httpx>=0.27.0
+
+# 5. Testing & Solvency Invariant Verification (Architecture Section 5 & Implementation Plan)
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
