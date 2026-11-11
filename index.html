@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -12,7 +12,7 @@
 <body>
   <div class="topcredit"><span><em>Crafted by</em><b>Quiz Master K Gopi Krishna</b></span></div>
   <div class="app">
-    <aside class="side">
+    <aside class="side" aria-label="Sidebar">
       <h1 class="brand">PMM<span>3</span><small>Pharmaceutics Mastery Matrix 3</small></h1>
 
       <nav class="menu" id="filters" aria-label="Filter questions">
@@ -48,7 +48,7 @@
           <div class="wallet" id="wallet" aria-live="polite"></div>
         </div>
         <label class="pill">Team
-          <input id="bidder" maxlength="24" placeholder="Your team" autocomplete="off">
+          <input type="text" id="bidder" maxlength="24" placeholder="Your team" autocomplete="off">
           <span class="avatar" id="avatar" aria-hidden="true">?</span>
         </label>
       </header>
@@ -77,7 +77,7 @@
           <section class="card rules" id="rules" aria-label="How it works"></section>
         </div>
 
-        <aside class="card feedcard">
+        <aside class="card feedcard" aria-label="Live activity">
           <h2>Live activity</h2>
           <ol id="feed"></ol>
         </aside>
@@ -88,7 +88,7 @@
 
   <dialog id="bidDialog">
     <form method="dialog" id="bidForm">
-      <h3 id="bidTitle"></h3>
+      <h3 id="bidTitle">Place a bid</h3>
       <p class="muted" id="bidInfo"></p>
       <label>Your bid (points)
         <input id="bidAmount" type="number" inputmode="numeric" min="1" step="1" required>
