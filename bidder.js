@@ -378,3 +378,18 @@ setInterval(() => {
 }, 1000);
 
 render();
+
+/* ---------- quiz master login ---------- */
+function adminLogin() {
+  if ($("#adminPass").value === ADMIN_PASSCODE) {
+    sessionStorage.setItem("pmm3-admin", "1");
+    location.href = "admin.html";
+  } else { $("#adminErr").textContent = "Wrong passcode."; $("#adminPass").select(); }
+}
+$("#adminBtn").addEventListener("click", () => {
+  if (sessionStorage.getItem("pmm3-admin") === "1") { location.href = "admin.html"; return; }
+  $("#adminPass").value = ""; $("#adminErr").textContent = "";
+  $("#adminDialog").showModal(); $("#adminPass").focus();
+});
+$("#adminGo").addEventListener("click", adminLogin);
+$("#adminPass").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); adminLogin(); } });

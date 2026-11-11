@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -11,7 +11,7 @@
 </head>
 <body>
   <div class="app">
-    <aside class="side">
+    <aside class="side" aria-label="Sidebar">
       <h1 class="brand">PMM<span>3</span><small>Pharmaceutics Mastery Matrix 3</small></h1>
 
       <nav class="menu" id="filters" aria-label="Filter questions">
@@ -28,6 +28,12 @@
           Closed
         </button>
       </nav>
+      <nav class="menu adminmenu" aria-label="Quiz master">
+        <button id="adminBtn" type="button">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z"/><path d="M9.5 12l2 2 3.5-4"/></svg>
+          Admin login
+        </button>
+      </nav>
     </aside>
 
     <div class="content">
@@ -41,7 +47,7 @@
           <div class="wallet" id="wallet" aria-live="polite"></div>
         </div>
         <label class="pill">Team
-          <input id="bidder" maxlength="24" placeholder="Your team" autocomplete="off">
+          <input type="text" id="bidder" maxlength="24" placeholder="Your team" autocomplete="off">
           <span class="avatar" id="avatar" aria-hidden="true">?</span>
         </label>
       </header>
@@ -70,7 +76,7 @@
           <section class="card rules" id="rules" aria-label="How it works"></section>
         </div>
 
-        <aside class="card feedcard">
+        <aside class="card feedcard" aria-label="Live activity">
           <h2>Live activity</h2>
           <ol id="feed"></ol>
         </aside>
@@ -80,7 +86,7 @@
 
   <dialog id="bidDialog">
     <form method="dialog" id="bidForm">
-      <h3 id="bidTitle"></h3>
+      <h3 id="bidTitle">Place a bid</h3>
       <p class="muted" id="bidInfo"></p>
       <label>Your bid (points)
         <input id="bidAmount" type="number" inputmode="numeric" min="1" step="1" required>
@@ -90,6 +96,21 @@
       <div class="row">
         <button value="cancel" class="ghost" type="submit" formnovalidate>Cancel</button>
         <button id="bidGo" type="button" class="primary">Place bid</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="adminDialog">
+    <form method="dialog" id="adminForm">
+      <h3>Quiz master login</h3>
+      <p class="muted">Enter the passcode to open the quiz master page.</p>
+      <label>Passcode
+        <input id="adminPass" type="password" autocomplete="current-password">
+      </label>
+      <p class="err" id="adminErr" role="alert"></p>
+      <div class="row">
+        <button value="cancel" class="ghost" type="submit" formnovalidate>Cancel</button>
+        <button id="adminGo" type="button" class="primary">Sign in</button>
       </div>
     </form>
   </dialog>

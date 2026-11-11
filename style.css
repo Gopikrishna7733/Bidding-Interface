@@ -497,3 +497,7 @@ body.live { font-size: clamp(14px, 1.05vw, 26px); padding: 1rem 1.2rem; }
 .ansreview b.ok { color: var(--lav); }
 .ansreview b.no { color: var(--danger); }
 @media (max-width: 640px) { .pairrow, .mrow { grid-template-columns: 1fr; } }
+
+/* admin login button at the bottom of the team page sidebar */
+.adminmenu { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); }
+@media (max-width: 900px) { .adminmenu { margin-top: 0; padding-top: 0; border-top: 0; } }

@@ -2,8 +2,6 @@
    IMPORTANT: this passcode only hides the page from casual visitors. Anyone can read
    it in the page source. Real protection needs a backend sign-in (e.g. Firebase Auth). */
 
-const ADMIN_PASSCODE = "MrKrsna";
-
 function showPanel() {
   $("#gate").hidden = true; $("#panel").hidden = false; $("#lockBtn").hidden = false;
   state = load(); $("#sPts").value = state.startPts; renderRows(); renderTeams(); renderDrafts();
