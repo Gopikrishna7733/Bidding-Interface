@@ -501,3 +501,6 @@ body.live { font-size: clamp(14px, 1.05vw, 26px); padding: 1rem 1.2rem; }
 /* admin login button at the bottom of the team page sidebar */
 .adminmenu { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); }
 @media (max-width: 900px) { .adminmenu { margin-top: 0; padding-top: 0; border-top: 0; } }
+
+/* credit line at the bottom of every page */
+.credit { text-align: center; color: var(--mute); font-size: 13px; font-weight: 600; letter-spacing: .02em; padding: 26px 12px 10px; }

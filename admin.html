@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
   <div class="app">
@@ -76,14 +76,9 @@
           <div class="lotform">
             <label class="wide">Question type
               <select id="qType">
-                <option value="blank">Fill in the Blanks</option>
-                <option value="statement">Statement correct</option>
-                <option value="reasoning">Reasoning</option>
+                <option value="blank" selected>Fill in the Blanks</option>
                 <option value="aptitude">Multiple Choice Questions</option>
                 <option value="matching">Matching</option>
-                <option value="qa" selected>Question and Answer</option>
-                <option value="video">Watch Video and Answer</option>
-                <option value="sound">Guess the Answer by Sound</option>
               </select>
             </label>
             <p class="hint wide" id="typeHelp"></p>
@@ -176,16 +171,17 @@
           </div>
         </section>
       </main>
+      <footer class="credit">Crafted by Quiz Master K Gopi Krishna</footer>
     </div>
   </div>
 
   <div id="toast" role="status" aria-live="polite"></div>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js?v=3"></script>
-  <script src="store.js?v=3"></script>
-  <script src="sync.js?v=3"></script>
-  <script src="admin.js?v=3"></script>
-  <script src="particles.js?v=3"></script>
+  <script src="firebase-config.js?v=4"></script>
+  <script src="store.js?v=4"></script>
+  <script src="sync.js?v=4"></script>
+  <script src="admin.js?v=4"></script>
+  <script src="particles.js?v=4"></script>
 </body>
 </html>
