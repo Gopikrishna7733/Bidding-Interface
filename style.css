@@ -99,6 +99,7 @@ a { color: inherit; text-decoration: none; }
 .search input { height: 100%; padding: 0; border: 0; border-radius: 0; background: transparent; color: var(--text); font-size: 14px; }
 .search input::placeholder { color: var(--mute); }
 .pill { padding: 0 6px 0 18px; font-weight: 600; white-space: nowrap; }
+.pill label { margin: 0; font: inherit; color: inherit; }
 .pill input { width: 150px; padding: 0; border: 0; border-radius: 0; background: transparent; color: #fff; font-weight: 600; }
 .pill input::placeholder { color: var(--mute); font-weight: 500; }
 .search:focus-within, .pill:focus-within { outline: 3px solid var(--lav); outline-offset: 2px; }
@@ -498,9 +499,6 @@ body.live { font-size: clamp(14px, 1.05vw, 26px); padding: 1rem 1.2rem; }
 .ansreview b.no { color: var(--danger); }
 @media (max-width: 640px) { .pairrow, .mrow { grid-template-columns: 1fr; } }
 
-/* admin login button at the bottom of the team page sidebar */
-.adminmenu { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); }
-@media (max-width: 900px) { .adminmenu { margin-top: 0; padding-top: 0; border-top: 0; } }
 
 /* credit line at the bottom of every page */
 .credit { text-align: center; color: var(--mute); font-size: 13px; font-weight: 600; letter-spacing: .02em; padding: 26px 12px 10px; }
@@ -543,3 +541,54 @@ body.live .topcredit { padding-top: 0; }
 
 /* footer credit uses the same glowing label, with space above it */
 .topcredit.botcredit, body.live .topcredit.botcredit { padding: 22px 12px 10px; }
+
+/* team name: type it, lock it in once */
+.pill .lockteam { height: 32px; padding: 0 14px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, .28); background: rgba(255, 255, 255, .1); color: #fff; font: 700 12px/1 var(--font); cursor: pointer; }
+.pill .lockteam:hover { background: rgba(255, 255, 255, .2); }
+.pill .lockteam[hidden] { display: none; }
+.pill .lockedtag { display: none; color: var(--lav); }
+.pill.locked .lockedtag { display: grid; place-items: center; }
+.pill.locked input { cursor: not-allowed; }
+
+/* leaderboard: 1st place gets sparkles (teamfx.js), 2nd and 3rd glow */
+.bar.r1 .bl { color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, .5); }
+.bar.r2 .fill { animation: glow2 2.4s ease-in-out infinite alternate; }
+.bar.r3 .fill { animation: glow3 2.4s ease-in-out infinite alternate; animation-delay: -1.2s; }
+.bar.r2 .bl { animation: txt2 2.4s ease-in-out infinite alternate; }
+.bar.r3 .bl { animation: txt3 2.4s ease-in-out infinite alternate; animation-delay: -1.2s; }
+@keyframes glow2 {
+  from { box-shadow: 0 0 4px rgba(176, 214, 240, .35), 0 0 10px rgba(196, 181, 245, .2); filter: brightness(1); }
+  to { box-shadow: 0 0 14px rgba(176, 214, 240, .95), 0 0 30px rgba(196, 181, 245, .55); filter: brightness(1.06); }
+}
+@keyframes glow3 {
+  from { box-shadow: 0 0 4px rgba(255, 179, 138, .35), 0 0 10px rgba(255, 150, 112, .2); filter: brightness(1); }
+  to { box-shadow: 0 0 14px rgba(255, 179, 138, .95), 0 0 30px rgba(255, 150, 112, .55); filter: brightness(1.06); }
+}
+@keyframes txt2 { from { text-shadow: 0 0 0 rgba(176, 214, 240, 0); } to { text-shadow: 0 0 10px rgba(176, 214, 240, .9); } }
+@keyframes txt3 { from { text-shadow: 0 0 0 rgba(255, 179, 138, 0); } to { text-shadow: 0 0 10px rgba(255, 179, 138, .9); } }
+@media (prefers-reduced-motion: reduce) {
+  .bar.r2 .fill, .bar.r3 .fill, .bar.r2 .bl, .bar.r3 .bl { animation: none; }
+  .bar.r2 .fill { box-shadow: 0 0 12px rgba(176, 214, 240, .7); }
+  .bar.r3 .fill { box-shadow: 0 0 12px rgba(255, 179, 138, .7); }
+}
+
+/* live scoreboard and quiz master table: same podium as the team page */
+.brows li.r1 .tm { color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, .5); }
+.brows li.r2 { animation: lglow2 2.4s ease-in-out infinite alternate; }
+.brows li.r3 { animation: lglow3 2.4s ease-in-out infinite alternate; animation-delay: -1.2s; }
+@keyframes lglow2 { from { box-shadow: 0 0 4px rgba(176, 214, 240, .25); } to { box-shadow: 0 0 20px rgba(176, 214, 240, .75), 0 0 38px rgba(176, 214, 240, .35); } }
+@keyframes lglow3 { from { box-shadow: 0 0 4px rgba(196, 181, 245, .25); } to { box-shadow: 0 0 20px rgba(196, 181, 245, .75), 0 0 38px rgba(196, 181, 245, .35); } }
+.teamtable tr.r1 td:first-child b { color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, .5); }
+.teamtable tr.r2 td { animation: rowglow2 2.4s ease-in-out infinite alternate; }
+.teamtable tr.r3 td { animation: rowglow3 2.4s ease-in-out infinite alternate; animation-delay: -1.2s; }
+@keyframes rowglow2 { from { background-color: rgba(176, 214, 240, 0); } to { background-color: rgba(176, 214, 240, .16); } }
+@keyframes rowglow3 { from { background-color: rgba(255, 179, 138, 0); } to { background-color: rgba(255, 179, 138, .16); } }
+.teamtable tr.r2 td:first-child b { animation: txt2 2.4s ease-in-out infinite alternate; }
+.teamtable tr.r3 td:first-child b { animation: txt3 2.4s ease-in-out infinite alternate; animation-delay: -1.2s; }
+@media (prefers-reduced-motion: reduce) {
+  .brows li.r2, .brows li.r3, .teamtable tr.r2 td, .teamtable tr.r3 td, .teamtable tr.r2 td:first-child b, .teamtable tr.r3 td:first-child b { animation: none; }
+  .brows li.r2 { box-shadow: 0 0 14px rgba(176, 214, 240, .6); }
+  .brows li.r3 { box-shadow: 0 0 14px rgba(196, 181, 245, .6); }
+  .teamtable tr.r2 td { background-color: rgba(176, 214, 240, .1); }
+  .teamtable tr.r3 td { background-color: rgba(255, 179, 138, .1); }
+}

@@ -45,9 +45,11 @@ function renderTeams() {
     el.innerHTML = '<tr><td colspan="5" class="empty">No teams yet. Teams appear here when they enter their team name.</td></tr>';
     return;
   }
+  /* podium effects start once points differ; tied teams share a rank */
+  const podium = new Set(rows.map((t) => t.pts)).size > 1, rankOf = (t) => 1 + rows.filter((x) => x.pts > t.pts).length;
   el.innerHTML = rows.map((t) => {
-    const k = nk(t.name), bids = state.bids.filter((b) => nk(b.name) === k).length;
-    return `<tr data-team="${esc(k)}">
+    const k = nk(t.name), bids = state.bids.filter((b) => nk(b.name) === k).length, rk = rankOf(t);
+    return `<tr data-team="${esc(k)}" class="${podium && rk <= 3 ? "r" + rk : ""}">
       <td><b>${esc(t.name)}</b><small>${entered(t.name) ? "Entered own points" : "Using starting points"}</small></td>
       <td><input class="ptsin" type="number" min="0" step="1" inputmode="numeric" value="${t.pts}" aria-label="Points for ${esc(t.name)}"></td>
       <td>${t.held ? pts(t.held) + " pts" : "–"}</td>

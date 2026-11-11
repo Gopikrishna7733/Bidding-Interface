@@ -126,7 +126,9 @@ function othersHTML(cur) {
 
 function boardHTML() {
   const rows = teams();
-  const body = rows.length ? '<ol class="brows">' + rows.map((r, i) => `<li class="r${i + 1 <= 3 ? i + 1 : ""}">
+  /* podium effects start once points differ; tied teams share a rank */
+  const podium = new Set(rows.map((r) => r.pts)).size > 1, rankOf = (r) => 1 + rows.filter((x) => x.pts > r.pts).length;
+  const body = rows.length ? '<ol class="brows">' + rows.map((r, i) => `<li class="${podium && rankOf(r) <= 3 ? "r" + rankOf(r) : ""}">
       <span class="rk">${i + 1}</span><span class="tm">${esc(r.name)}${r.held ? `<small>${lock} ${pts(r.held)} locked in bids</small>` : ""}</span><b class="am">${pts(r.pts)}</b></li>`).join("") + "</ol>"
     : '<p class="dim">Teams appear here as soon as they join.</p>';
   return `<h2>Scoreboard</h2>${body}`;

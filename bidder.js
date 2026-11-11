@@ -13,7 +13,8 @@ const ICONS = [
 ].map(icon);
 const CHEV = (d) => `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
 
-const me = () => $("#bidder").value.trim();
+/* the team name is whatever this device has locked in; typing alone does not count */
+const me = () => (localStorage.getItem("pmm3-team") || "").trim();
 /* search looks at the topic, subject, difficulty and number only, never the hidden question text */
 const matches = (l) => {
   const q = $("#search").value.trim().toLowerCase();
@@ -142,12 +143,18 @@ function renderChart() {
   if (metric === "board") {
     const rows = teams();
     note.textContent = `The white tick marks the ${pts(state.startPts)} points every team starts with.`;
-    if (!rows.length) { $("#bars").innerHTML = '<p class="empty">Teams appear here as soon as they enter a team name.</p>'; return; }
+    if (!rows.length) { $("#bars").innerHTML = '<p class="empty">Teams appear here as soon as they lock in a team name.</p>'; return; }
     const max = Math.max(state.startPts, ...rows.map((r) => r.pts));
-    $("#bars").innerHTML = rows.map((r, i) => `<div class="bar ${me() && nk(r.name) === nk(me()) ? "me" : ""}">
-      <span class="bl">${i + 1}. ${esc(r.name)}${me() && nk(r.name) === nk(me()) ? " (you)" : ""}</span>
+    /* podium effects start once points differ; tied teams share a rank */
+    const podium = new Set(rows.map((r) => r.pts)).size > 1;
+    const rankOf = (r) => 1 + rows.filter((x) => x.pts > r.pts).length;
+    $("#bars").innerHTML = rows.map((r, i) => {
+      const rk = rankOf(r), mine = me() && nk(r.name) === nk(me());
+      return `<div class="bar ${mine ? "me" : ""} ${podium && rk <= 3 ? "r" + rk : ""}">
+      <span class="bl">${i + 1}. ${esc(r.name)}${mine ? " (you)" : ""}</span>
       <div class="track"><div class="fill" style="width:${Math.max(1.5, (r.pts / max) * 100)}%"></div><i class="start" style="left:${(state.startPts / max) * 100}%"></i></div>
-      <b>${pts(r.pts)}</b><small>${r.held ? pts(r.held) + " held" : ""}</small></div>`).join("");
+      <b>${pts(r.pts)}</b><small>${r.held ? pts(r.held) + " held" : ""}</small></div>`;
+    }).join("");
     return;
   }
   note.textContent = "The white tick on each bar marks the starting bid.";
@@ -180,7 +187,7 @@ function renderFeed() {
 function renderWallet() {
   const n = me(), w = $("#wallet");
   $("#avatar").textContent = n ? n[0].toUpperCase() : "?";
-  if (!n) { w.dataset.team = ""; w.innerHTML = '<span class="tl">Enter your team name to see your score</span>'; return; }
+  if (!n) { w.dataset.team = ""; w.innerHTML = '<span class="tl">Lock in your team name to see your score</span>'; return; }
   const locked = entered(n);
   let inp = $("#myPts");
   if (!inp || inp.dataset.locked !== String(locked) || w.dataset.team !== nk(n)) {
@@ -194,7 +201,7 @@ function renderWallet() {
   if (locked || (inp.dataset.dirty !== "1" && document.activeElement !== inp)) inp.value = points(n);
   $("#myNote").textContent = locked ? "Locked. Points can be entered only once." : "You can enter your points only once.";
   const rows = teams(), i = rows.findIndex((r) => nk(r.name) === nk(n));
-  $("#myRank").textContent = i >= 0 ? `Rank ${i + 1} of ${rows.length} on the leaderboard` : "Press Enter in the Team box to join the leaderboard";
+  $("#myRank").textContent = i >= 0 ? `Rank ${i + 1} of ${rows.length} on the leaderboard` : "Lock in your team name to join the leaderboard";
 }
 
 function renderRules() {
@@ -208,13 +215,22 @@ function renderRules() {
     </div>`;
 }
 
-function render() { renderHero(); renderChart(); renderFeed(); renderWallet(); renderRules(); }
+/* the team name box: editable until it is locked in, then fixed */
+function renderTeamBox() {
+  const n = me(), inp = $("#bidder");
+  if (n && inp.value !== n) inp.value = n;
+  inp.readOnly = !!n;
+  inp.closest(".pill").classList.toggle("locked", !!n);
+  $("#lockTeam").hidden = !!n;
+}
+
+function render() { renderTeamBox(); renderHero(); renderChart(); renderFeed(); renderWallet(); renderRules(); }
 
 /* ---------- bidding ---------- */
 function openBid(id) {
   const lot = state.lots.find((l) => l.id === id);
   if (!lot || !isLive(lot)) return;
-  if (!me()) { $("#bidder").focus(); toast("Enter your team name first"); return; }
+  if (!me()) { $("#bidder").focus(); toast("Lock in your team name first"); return; }
   const free = available(me(), lot.id), top = topBid(lot.id);
   if (top && nk(top.name) === nk(me())) { toast("You are already leading this question"); return; }
   if (free < minNext(lot)) { toast(`Not enough points. You have ${pts(free)} free; the minimum bid is ${pts(minNext(lot))}.`); return; }
@@ -362,8 +378,16 @@ $("#metric").addEventListener("click", (e) => {
 });
 $("#bidder").value = localStorage.getItem("pmm3-team") || "";
 syncEpoch();
-$("#bidder").addEventListener("input", (e) => { localStorage.setItem("pmm3-team", e.target.value.trim()); pick = null; renderHero(); renderWallet(); renderChart(); });
-$("#bidder").addEventListener("change", registerTeam);
+function lockTeam() {
+  const n = $("#bidder").value.trim();
+  if (me()) { toast("Your team name is already locked in"); return; }
+  if (!n) { toast("Type your team name first"); $("#bidder").focus(); return; }
+  if (!confirm(`Lock in "${n}" as your team name? You can enter your team name only once.`)) return;
+  localStorage.setItem("pmm3-team", n);
+  pick = null; registerTeam(); toast("Team name locked in");
+}
+$("#lockTeam").addEventListener("click", lockTeam);
+$("#bidder").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); lockTeam(); } });
 registerTeam();
 window.addEventListener("storage", (e) => { if (e.key === KEY) { state = load(); syncEpoch(); render(); } });
 
@@ -378,18 +402,3 @@ setInterval(() => {
 }, 1000);
 
 render();
-
-/* ---------- quiz master login ---------- */
-function adminLogin() {
-  if ($("#adminPass").value === ADMIN_PASSCODE) {
-    sessionStorage.setItem("pmm3-admin", "1");
-    location.href = "admin.html";
-  } else { $("#adminErr").textContent = "Wrong passcode."; $("#adminPass").select(); }
-}
-$("#adminBtn").addEventListener("click", () => {
-  if (sessionStorage.getItem("pmm3-admin") === "1") { location.href = "admin.html"; return; }
-  $("#adminPass").value = ""; $("#adminErr").textContent = "";
-  $("#adminDialog").showModal(); $("#adminPass").focus();
-});
-$("#adminGo").addEventListener("click", adminLogin);
-$("#adminPass").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); adminLogin(); } });
