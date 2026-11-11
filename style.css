@@ -534,3 +534,9 @@ body.live { font-size: clamp(14px, 1.05vw, 26px); padding: 1rem 1.2rem; }
 }
 @media (prefers-reduced-motion: reduce) { .topcredit span, .topcredit b { animation: none; } }
 body.live .topcredit { padding-top: 0; }
+
+/* live page: credit sits in the top bar, centred between Score Board and Auto */
+.ltop .lmenu { margin-right: 0; }
+.ltop .topcredit { padding: 0; margin: 0 auto; }
+.ltop .topcredit span { font-size: .8rem; padding: .45rem 1.2rem; }
+.ltop .topcredit em { font-size: .62rem; }
