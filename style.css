@@ -504,6 +504,7 @@ body.live { font-size: clamp(14px, 1.05vw, 26px); padding: 1rem 1.2rem; }
 
 /* credit line at the bottom of every page */
 .credit { text-align: center; color: var(--mute); font-size: 13px; font-weight: 600; letter-spacing: .02em; padding: 26px 12px 10px; }
+
 /* glowing credit label at the top of every page */
 .topcredit { text-align: center; padding: 12px 12px 0; }
 .topcredit span { display: inline-flex; align-items: center; gap: 12px; padding: 8px 20px; border-radius: 999px; border: 1px solid rgba(196, 181, 245, .35); background: rgba(255, 255, 255, .045); box-shadow: 0 0 22px rgba(196, 181, 245, .16); font-size: 13px; letter-spacing: .04em; }

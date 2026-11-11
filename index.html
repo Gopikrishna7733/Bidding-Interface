@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -7,12 +7,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
-   <div class="topcredit"><span><em>Crafted by</em><b>Quiz Master Kanike Gopi Krishna</b></span></div>
+  <div class="topcredit"><span><em>Crafted by</em><b>Quiz Master K Gopi Krishna</b></span></div>
   <div class="app">
-    <aside class="side" aria-label="Sidebar">
+    <aside class="side">
       <h1 class="brand">PMM<span>3</span><small>Pharmaceutics Mastery Matrix 3</small></h1>
 
       <nav class="menu" id="filters" aria-label="Filter questions">
@@ -48,7 +48,7 @@
           <div class="wallet" id="wallet" aria-live="polite"></div>
         </div>
         <label class="pill">Team
-          <input type="text" id="bidder" maxlength="24" placeholder="Your team" autocomplete="off">
+          <input id="bidder" maxlength="24" placeholder="Your team" autocomplete="off">
           <span class="avatar" id="avatar" aria-hidden="true">?</span>
         </label>
       </header>
@@ -77,18 +77,18 @@
           <section class="card rules" id="rules" aria-label="How it works"></section>
         </div>
 
-        <aside class="card feedcard" aria-label="Live activity">
+        <aside class="card feedcard">
           <h2>Live activity</h2>
           <ol id="feed"></ol>
         </aside>
       </div>
-      <footer class="credit">Crafted by Quiz Master Kanike Gopi Krishna</footer>
+      <footer class="credit">Crafted by Quiz Master K Gopi Krishna</footer>
     </div>
   </div>
 
   <dialog id="bidDialog">
     <form method="dialog" id="bidForm">
-      <h3 id="bidTitle">Place a bid</h3>
+      <h3 id="bidTitle"></h3>
       <p class="muted" id="bidInfo"></p>
       <label>Your bid (points)
         <input id="bidAmount" type="number" inputmode="numeric" min="1" step="1" required>
@@ -120,10 +120,10 @@
   <div id="toast" role="status" aria-live="polite"></div>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js?v=4"></script>
-  <script src="store.js?v=4"></script>
-  <script src="sync.js?v=4"></script>
-  <script src="bidder.js?v=4"></script>
-  <script src="particles.js?v=4"></script>
+  <script src="firebase-config.js?v=5"></script>
+  <script src="store.js?v=5"></script>
+  <script src="sync.js?v=5"></script>
+  <script src="bidder.js?v=5"></script>
+  <script src="particles.js?v=5"></script>
 </body>
 </html>
