@@ -540,3 +540,6 @@ body.live .topcredit { padding-top: 0; }
 .ltop .topcredit { padding: 0; margin: 0 auto; }
 .ltop .topcredit span { font-size: .8rem; padding: .45rem 1.2rem; }
 .ltop .topcredit em { font-size: .62rem; }
+
+/* footer credit uses the same glowing label, with space above it */
+.topcredit.botcredit, body.live .topcredit.botcredit { padding: 22px 12px 10px; }
