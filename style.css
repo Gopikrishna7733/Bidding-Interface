@@ -504,3 +504,14 @@ body.live { font-size: clamp(14px, 1.05vw, 26px); padding: 1rem 1.2rem; }
 
 /* credit line at the bottom of every page */
 .credit { text-align: center; color: var(--mute); font-size: 13px; font-weight: 600; letter-spacing: .02em; padding: 26px 12px 10px; }
+/* glowing credit label at the top of every page */
+.topcredit { text-align: center; padding: 12px 12px 0; }
+.topcredit span { display: inline-flex; align-items: center; gap: 12px; padding: 8px 20px; border-radius: 999px; border: 1px solid rgba(196, 181, 245, .35); background: rgba(255, 255, 255, .045); box-shadow: 0 0 22px rgba(196, 181, 245, .16); font-size: 13px; letter-spacing: .04em; }
+.topcredit em { font-style: normal; font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: .16em; color: var(--mute); }
+.topcredit b { font-weight: 800; color: #fff; text-shadow: 0 0 6px rgba(196, 181, 245, .95), 0 0 14px rgba(176, 214, 240, .75), 0 0 28px rgba(255, 179, 138, .5); animation: creditglow 3s ease-in-out infinite alternate; }
+@keyframes creditglow {
+  from { text-shadow: 0 0 4px rgba(196, 181, 245, .7), 0 0 10px rgba(176, 214, 240, .5), 0 0 18px rgba(255, 179, 138, .3); }
+  to { text-shadow: 0 0 8px rgba(196, 181, 245, 1), 0 0 20px rgba(176, 214, 240, .9), 0 0 38px rgba(255, 179, 138, .7); }
+}
+@media (prefers-reduced-motion: reduce) { .topcredit b { animation: none; } }
+body.live .topcredit { padding-top: 0; }
