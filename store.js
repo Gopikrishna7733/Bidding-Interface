@@ -14,7 +14,7 @@
 const KEY = "pmm3-v1";
 /* Quiz master passcode, shared by the team page login and admin.html. It only hides the page
    from casual visitors; anyone can read it in the source. Real protection needs a backend sign-in. */
-const ADMIN_PASSCODE = "MrKrsna@596";
+const ADMIN_PASSCODE = "MrKrsna";
 const blank = () => ({ nextId: 1, startPts: 1000, lots: [], bids: [], answers: [], base: {}, epoch: 0, roster: [], renamed: [], removed: {}, drafts: [], nextDraft: 1 });
 
 function load() {
